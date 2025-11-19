@@ -36,7 +36,7 @@ cd SIK-Guide-Code-master/
 mkdir examples
 mv SIK* examples/ # move the example folders into the folder where arduino can actually see them
 wget https://github.com/OrigamiMarie/origamimarie-configurations/raw/refs/heads/master/sparkfun/library.properties # fetch the properties file that tells arduino how to read the example code
-chown -r sparkfun /home/sparkfun/Arduino/ # admin created these files, so change their owner to Arduino
+chown -R sparkfun /home/sparkfun/ # admin created some of these files, so change their owner to Arduino
 
 # Lock out the internet
 ufw default deny incoming
