@@ -25,13 +25,13 @@ chmod a+r HbDAj.png # everybody can read the image
 mv HbDAj.png /usr/bin/arduino-ide-icon.png # make the icon available to everybody
 cd /home/sparkfun/.local/share/applications/
 wget https://github.com/OrigamiMarie/origamimarie-configurations/raw/refs/heads/master/sparkfun/arduino-ide.desktop # get the file that defines the arduino application launcher on the dock
-sudo -H su sparkfun gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'arduino-ide.desktop']" # simplify the dock and add the arduino icon (run as the sparkfun user, so it edits their dock)
+sudo -i -u sparkfun gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'arduino-ide.desktop']" # simplify the dock and add the arduino icon (run as the sparkfun user, so it edits their dock)
 
 
 # Install the sample Sparkfun code.
 mkdir -p /home/sparkfun/Arduino/libraries/ # make a libraries folder for the example code
 cd /home/sparkfun/Arduino/libraries/
-dwget https://github.com/sparkfun/SIK-Guide-Code/archive/master.zip # fetch the example code
+wget https://github.com/sparkfun/SIK-Guide-Code/archive/master.zip # fetch the example code
 unzip master.zip # extract the example code
 cd SIK-Guide-Code-master/
 mkdir examples
