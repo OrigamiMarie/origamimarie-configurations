@@ -1,30 +1,30 @@
 #!/bin/bash
-set -e # fail the whole script on any error
+set -e # fail the whole secript on any error
 cd ~ # start in the user directory
 
 # Get everything up to date.
-apt-get update # this updates the list of available software and libraries
-apt-get upgrade -y # this updates the installed software and libraries
-apt-get install vim # a command-line text editor
+sudo apt-get update # this updates the list of available software and libraries
+sudo apt-get upgrade -y # this updates the installed software and libraries
+sudo apt-get install -y vim # a command-line text editor
 
 # Add a new user that will have full permissions.
-adduser admin --disabled-password --gecos Admin # add the admin
-echo admin:admin | chpasswd # give admin a password (should change later)
-adduser admin sudo # make admin a sudoer
-usermod -a -G dialout sparkfun # allow arduino to talk to the sparkfun board
+sudo adduser admin --disabled-password --gecos Admin # add the admin
+echo admin:adminpassword | sudo chpasswd # give admin a password (should change later)
+sudo adduser admin sudo # make admin a sudoer
+sudo usermod -a -G dialout sparkfun # allow arduino to talk to the sparkfun board
 
 
 # Install Arduino IDE.
 wget https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.6_Linux_64bit.AppImage # fetch the arduino program
 chmod a+x arduino-ide_2.3.6_Linux_64bit.AppImage # allow everybody to run it
-mv arduino-ide_2.3.6_Linux_64bit.AppImage /usr/bin/ # put arduino in a folder that everybody can run it from
-ln -s /usr/bin/arduino-ide_2.3.6_Linux_64bit.AppImage /usr/bin/arduino-ide # prettier program name, easier to switch to new versions
+sudo mv arduino-ide_2.3.6_Linux_64bit.AppImage /usr/bin/ # put arduino in a folder that everybody can run it from
+sudo ln -s /usr/bin/arduino-ide_2.3.6_Linux_64bit.AppImage /usr/bin/arduino-ide # prettier program name, easier to switch to new versions
 
 
 # Give Arduino IDE an icon in the dock.
 wget https://i.sstatic.net/HbDAj.png # download the app icon
 chmod a+r HbDAj.png # everybody can read the image
-mv HbDAj.png /usr/bin/arduino-ide-icon.png # make the icon available to everybody
+sudo mv HbDAj.png /usr/bin/arduino-ide-icon.png # make the icon available to everybody
 cd /home/sparkfun/.local/share/applications/
 wget https://github.com/OrigamiMarie/origamimarie-configurations/raw/refs/heads/master/sparkfun/arduino-ide.desktop # get the file that defines the arduino application launcher on the dock
 gsettings set org.gnome.shell favorite-apps "['pop-cosmic-applications.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'arduino-ide.desktop']" # simplify the dock and add the arduino icon (run as the sparkfun user, so it edits their dock)
@@ -40,14 +40,14 @@ mkdir examples
 mv SIK* examples/ # move the example folders into the folder where arduino can actually see them
 wget https://github.com/OrigamiMarie/origamimarie-configurations/raw/refs/heads/master/sparkfun/library.properties # fetch the properties file that tells arduino how to read the example code
 cd ~ # go back to the main directory
-su sparkfun -c "arduino-ide" # launch arduino-ide without sudo.  It needs to download a bunch of stuff before we remove internet access.
+arduino-ide # launch arduino-ide.  It needs to download a bunch of stuff before we remove internet access.
 
 
 # Cut the internet
-ufw default deny incoming
-ufw default deny outgoing
-ufw enable # takes effect on restart
+sudo ufw default deny incoming
+sudo ufw default deny outgoing
+sudo ufw enable # takes effect on restart
 
 
 # Reduce the sparkfun user's permissions
-deluser sparkfun sudo # takes effect on login / next new terminal session
+sudo deluser sparkfun sudo # takes effect on login / next new terminal session
