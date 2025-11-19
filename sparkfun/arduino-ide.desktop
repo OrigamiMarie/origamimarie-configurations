@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Arduino IDE
+Exec=/usr/bin/arduino-ide
+Comment=Launch Arduino IDE
+Terminal=false
+Type=Application
+Icon=/usr/bin/arduino-ide-icon.png
