@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e # fail the whole script on any error
+cd ~ # start in the user directory
 
 # Get everything up to date.
 apt-get update # this updates the list of available software and libraries
