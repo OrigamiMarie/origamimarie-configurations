@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e # fail the whole script on any error
 
 # Get everything up to date.
 apt-get update # this updates the list of available software and libraries
@@ -38,8 +39,5 @@ mv SIK* examples/ # move the example folders into the folder where arduino can a
 wget https://github.com/OrigamiMarie/origamimarie-configurations/raw/refs/heads/master/sparkfun/library.properties # fetch the properties file that tells arduino how to read the example code
 chown -R sparkfun /home/sparkfun/ # admin created some of these files, so change their owner to Arduino
 
-# Lock out the internet
-ufw default deny incoming
-ufw default deny outgoing
 ufw enable
 
