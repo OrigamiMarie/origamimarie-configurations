@@ -6,6 +6,7 @@ cd ~ # start in the user directory
 sudo apt-get update # this updates the list of available software and libraries
 sudo apt-get upgrade -y # this updates the installed software and libraries
 sudo apt-get install -y vim # a command-line text editor
+sudo apt-get remove -y brltty # this interferes with the USB connection to the sparkfun
 
 # Add a new user that will have full permissions.
 sudo adduser admin --disabled-password --gecos Admin # add the admin
