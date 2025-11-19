@@ -38,8 +38,8 @@ cd SIK-Guide-Code-master/
 mkdir examples
 mv SIK* examples/ # move the example folders into the folder where arduino can actually see them
 wget https://github.com/OrigamiMarie/origamimarie-configurations/raw/refs/heads/master/sparkfun/library.properties # fetch the properties file that tells arduino how to read the example code
-cd ~
-arduino-ide
+cd ~ # go back to the main directory
+arduino-ide # launch arduino-ide.  It needs to download a bunch of stuff before we remove internet access.
 
 
 # Cut the internet
